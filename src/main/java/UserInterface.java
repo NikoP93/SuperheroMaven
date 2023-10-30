@@ -82,7 +82,7 @@ public class UserInterface {
 
                 //find superhelte
                 ArrayList<Superhero> søgeResultat = database.findSuperheroes(brugerInput);
-                Superhero superheroDerSkalRedigeres = null;
+                Superhero superheroEdit = null;
 
                 //søgning finder ingen personer
                 if (søgeResultat.size() == 0) {
@@ -103,77 +103,68 @@ public class UserInterface {
 
                     int superheroValg = keyboard.nextInt();
                     keyboard.nextLine(); //clearer scanner
-                    superheroDerSkalRedigeres = søgeResultat.get(superheroValg - 1);
+                    superheroEdit = søgeResultat.get(superheroValg - 1);
                 }
                 //søgning finder 1 person
                 else {
-                    superheroDerSkalRedigeres = søgeResultat.get(0);
+                    superheroEdit = søgeResultat.get(0);
                 }
                 //Redigering af valgte personer
 
-                if (superheroDerSkalRedigeres != null) {
+                if (superheroEdit != null) {
                     System.out.println("Edit superhero stats. Press Enter if the stats do not need to get changed");
-                    String nyVærdi;
-                    System.out.println("Superhero name: " + superheroDerSkalRedigeres.getName());
-                    nyVærdi = keyboard.nextLine();
-                    if (!nyVærdi.isEmpty()) {
-                        superheroDerSkalRedigeres.setName(nyVærdi);
+                    String newAttribute;
+                    System.out.println("Superhero name: " + superheroEdit.getName());
+                    newAttribute = keyboard.nextLine();
+                    if (!newAttribute.isEmpty()) {
+                        superheroEdit.setName(newAttribute);
                     }
-                    System.out.println("Real name: " + superheroDerSkalRedigeres.getRealName());
-                    nyVærdi = keyboard.nextLine();
-                    if (!nyVærdi.isEmpty()) {
-                        superheroDerSkalRedigeres.setRealName(nyVærdi);
+                    System.out.println("Real name: " + superheroEdit.getRealName());
+                    newAttribute = keyboard.nextLine();
+                    if (!newAttribute.isEmpty()) {
+                        superheroEdit.setRealName(newAttribute);
                     }
-                    System.out.println("Super power: " + superheroDerSkalRedigeres.getSuperPower());
-                    nyVærdi = keyboard.nextLine();
-                    if (!nyVærdi.isEmpty()) {
-                        superheroDerSkalRedigeres.setSuperPower(nyVærdi);
+                    System.out.println("Super power: " + superheroEdit.getSuperPower());
+                    newAttribute = keyboard.nextLine();
+                    if (!newAttribute.isEmpty()) {
+                        superheroEdit.setSuperPower(newAttribute);
                     }
-                    System.out.println("Year created: " + superheroDerSkalRedigeres.getYearCreated());
+                    System.out.println("Year created: " + superheroEdit.getYearCreated());
                     do {
-                        nyVærdi = keyboard.nextLine();
-                        if (nyVærdi.isEmpty()) {
+                        newAttribute = keyboard.nextLine();
+                        if (newAttribute.isEmpty()) {
                             break;
                         } else {
                             try {
-                                superheroDerSkalRedigeres.setYearCreated(Integer.parseInt(nyVærdi));
+                                superheroEdit.setYearCreated(Integer.parseInt(newAttribute));
                                 break;
                             } catch (NumberFormatException e) {
                                 System.out.println("Its not a valid number, try again");
                             }
                         }
                     } while (true);
-                    /*while (!keyboard.hasNextInt()) {
-                        keyboard.nextLine();
-                        System.out.println("Its not a valid number, try again");
-                        System.out.println("Year created: " + superheroDerSkalRedigeres.getYearCreated());
-                    }
-                    nyVærdi = keyboard.next();
-                    if (!nyVærdi.isEmpty()) {
-                        superheroDerSkalRedigeres.setYearCreated(Integer.parseInt(nyVærdi));
-                    } */
-
+                    
                     //keyboard.nextLine();
-                    System.out.println("Is Human: " + superheroDerSkalRedigeres.getIsHuman());
-                    nyVærdi = keyboard.nextLine();
-                    if (!nyVærdi.isEmpty()) {
-                        superheroDerSkalRedigeres.setIsHuman(nyVærdi);
+                    System.out.println("Is Human: " + superheroEdit.getIsHuman());
+                    newAttribute = keyboard.nextLine();
+                    if (!newAttribute.isEmpty()) {
+                        superheroEdit.setIsHuman(newAttribute);
                     }
-                    System.out.println("Strenght: " + superheroDerSkalRedigeres.getStrenght());
-                    nyVærdi = keyboard.nextLine();
-                    if (!nyVærdi.isEmpty()) {
-                        superheroDerSkalRedigeres.setStrenght(nyVærdi);
+                    System.out.println("Strenght: " + superheroEdit.getStrenght());
+                    newAttribute = keyboard.nextLine();
+                    if (!newAttribute.isEmpty()) {
+                        superheroEdit.setStrenght(newAttribute);
                     }
-                    System.out.println(superheroDerSkalRedigeres);
+                    System.out.println(superheroEdit);
                 }
 
             }
             else if (choice == DELETE_SUPERHERO){
                 System.out.println("What superhero do you wanna delete?");
                 String SearchTerm = keyboard.nextLine();
-                ArrayList<Superhero> ds = database.deleteSuperhero(SearchTerm);
-                if (ds != null){
-                    System.out.println(ds + "/nWas deleted");
+                boolean succesDelete = database.deleteSuperhero(SearchTerm);
+                if (succesDelete){
+                    System.out.println( SearchTerm + " Was deleted");
                 }
                 else {
                     System.out.println("No matching superhero");

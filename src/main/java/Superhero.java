@@ -8,6 +8,18 @@ public class Superhero {
     private String isHuman;
     private String strenght;
 
+    //konstruktør
+    public Superhero(String name, String realName, String superPower, int yearCreated, String isHuman, String strenght) {
+        this.name = name;
+        this.realName = realName;
+        this.superPower = superPower;
+        this.yearCreated = yearCreated;
+        this.isHuman = isHuman;
+        this.strenght = strenght;
+    }
+
+
+    //set metoder
     public void setName(String name) {
         this.name = name;
     }
@@ -33,18 +45,6 @@ public class Superhero {
     }
 
 
-
-    //konstruktør
-    public Superhero(String name, String realName,
-                     String superPower, int yearCreated, String isHuman, String strenght) {
-        this.name = name;
-        this.realName = realName;
-        this.superPower = superPower;
-        this.yearCreated = yearCreated;
-        this.isHuman = isHuman;
-        this.strenght = strenght;
-    }
-
     //get metoder
     public String getName() {
         return name;
@@ -69,7 +69,6 @@ public class Superhero {
     public String getStrenght() {
         return strenght;
     }
-
 
 
     @Override

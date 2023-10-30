@@ -1,6 +1,5 @@
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Database {
 
@@ -43,16 +42,16 @@ public class Database {
         return superheroes;
     }
 
-    public ArrayList<Superhero> deleteSuperhero(String superheroName){
-        Iterator<Superhero> itr = superherolist.iterator();
-        while (itr.hasNext()){
-            Superhero superhero = itr.next();
-            if (superhero.getName().equals(superheroName)){
-                itr.remove();
+
+
+    public boolean deleteSuperhero(String superheroName){
+        for (Superhero superhero : superherolist){
+            if (superhero.getName().toLowerCase().equals(superheroName.toLowerCase())){
+                superherolist.remove(superhero);
+                return true;
             }
         }
-        return superherolist;
-
+        return false;
     }
 
 
